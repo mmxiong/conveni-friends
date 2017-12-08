@@ -34,8 +34,9 @@ CREATE TABLE Message(
 	messageSessionId INT NOT NULL,
 	senderId VARCHAR(20) NOT NULL,
 	receiverId VARCHAR(20) NOT NULL,
-	content VARCHAR(500) NOT NULL,
-	timeCreated DATETIME DEFAULT CURRENT_TIMESTAMP,
+	text VARCHAR(500) NOT NULL,
+	timeCreated DATETIME NOT NULL,
+	giftedChatId VARCHAR(40) NOT NULL,
 	FOREIGN KEY(messageSessionId) REFERENCES MessageSession(messageSessionId),
 	FOREIGN KEY(senderId) REFERENCES User(userId),
 	FOREIGN KEY(receiverId) REFERENCES User(userId)

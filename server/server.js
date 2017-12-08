@@ -627,8 +627,17 @@ app.get('/v1/message/session/:messageSessionId', (req, res) => {
             let messageList = [];
 
             for (let i = 0; i < results.length; i++) {
-                const messages = JSON.parse(results[i].content);
-                messageList.push(messages);
+                
+                const message = {
+                    _id: results[i]['giftedChatId'],
+                    text: results[i]['text'],
+                    createdAt: results[i]['createdAt'],
+                    user: {
+                        _id: results[i]['senderId']
+                    }
+
+                }
+                messageList.push(message);
             }
 
             res.status(HttpStatus.OK).send(messageList);
@@ -652,16 +661,18 @@ app.get('/v1/message/session/:messageSessionId', (req, res) => {
  *
  * @returns {res} The response, including an HTTP status indicating success or failure, and error info, if any.
  */
-app.post('/v1/message/send', (req, res) => {
+app.post('/v1/message/send', upload.array(), (req, res) => {
     const { messageSessionId, senderId, receiverId } = req.query;
-    const content = req.body;
+    const text = req.body['text'];
+    const createdAt = req.body['createdAt'];
+    const _id = req.body['_id'];
     // NOTE: The GiftedChat._id is different than our Message schema id (which
     // currently is an autoincremented int). This needs to be addressed somehow.
 
-    const query = `INSERT INTO Message(messageSessionId,senderId, ` +
-                  `receiverId,content) ` +
-                  `VALUES(${messageSessionId},${senderId},` +
-                  `${receiverId},${content})`;
+    const query = `INSERT INTO MESSAGE(messageSessionId, senderId, ` +
+                  `receiverId, text, timeCreated, giftedChatId) ` +
+                  `VALUES(${messageSessionId}, ${senderId}, ${receiverId}, ` +
+                  `"${text}", "${createdAt}", "${_id}")`;
 
     db.query(query, (error, results) => {
         if (error) {
