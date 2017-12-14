@@ -58,12 +58,8 @@ export default class RequestHistory extends React.Component {
                 });
             });
         }
-<<<<<<< HEAD
-    }
-
-=======
 	}
-	
+
 	handleOnNavigateBack(requestId) {
 		if(requestId && requestId[1] === 'completed') {
 			let newData = this.state.accepted;
@@ -75,28 +71,19 @@ export default class RequestHistory extends React.Component {
 				}
 			}
 			newData.splice(spliceIndex, 1);
-			this.setState({accepted: newData});	
-		} 
+			this.setState({accepted: newData});
+		}
 	}
-    
->>>>>>> upstream/master
+
     _renderScene = ({ route }) => {
         switch (route.key) {
         case 'created':
         if (this.state.created) {
-<<<<<<< HEAD
-            return (<RequestListComponent data={this.state.created} user={this.state.user} navigation={this.props.navigation}/>);
-        }
-        case 'accepted':
-        if (this.state.accepted) {
-            return (<RequestListComponent data={this.state.accepted} user={this.state.user} navigation={this.props.navigation}/>);
-=======
             return (<RequestListComponent data={this.state.created} user={this.state.user} navigation={this.props.navigation} handleOnNavigateBack={()=>{console.log('created')}}/>);
         }
         case 'accepted':
         if (this.state.accepted) {
             return (<RequestListComponent data={this.state.accepted} user={this.state.user} navigation={this.props.navigation} handleOnNavigateBack={this.handleOnNavigateBack}/>);
->>>>>>> upstream/master
         }
         default:
             return <View><Text>oops</Text></View>;
