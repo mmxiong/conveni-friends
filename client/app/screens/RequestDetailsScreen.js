@@ -52,9 +52,10 @@ export default class RequestDetailsScreen extends React.Component {
 		if (userId === requesterId) {
 			return;
 		}
+		const currentTime = moment();
 		if (!accepted) {
-			return <CustomButton text="Accept" onPressHandle={() => this.accept()} />;
-		} else if (userId === providerId && !completed) {
+			return <CustomButton text="Accept" onPressHandle={() => this.accept() && currentTime < request.timeEnd} />;
+		} else if (userId === providerId && !completed && currentTime < request.timeEnd) {
 			return <CustomButton text="Complete" onPressHandle={() => this.complete()} />;
 		}
 		return;
