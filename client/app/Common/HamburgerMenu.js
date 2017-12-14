@@ -43,10 +43,22 @@ export default class HamburgerMenu extends Component {
         return(
             <Drawer type='overlay'
                 content={<View style={styles.hamburgerContainer}>
-                    <Button title='Change Password' onPress={() => {this.changePass();}}/>
-                    <Button title='Request History' onPress={() => {this.history();}}/>
-                    <Button title='Messages' onPress={() => {this.messages();}}/>
-                    <Button title='Logout' onPress={() => {this.logout();}}/>
+                    <Text style={styles.hamburgerItem}
+                      onPress={() => {this.changePass();}}
+                      >Change Password</Text>
+
+                    <Text style={styles.hamburgerItem}
+                      onPress={() => {this.history();}}
+                      >Request History</Text>
+
+                    <Text style={styles.hamburgerItem}
+                      onPress={() => {this.history();}}
+                      >Messages</Text>
+
+                    <Text style={styles.hamburgerItem}
+                      onPress={() => {this.history();}}
+                      >Logout</Text>
+                                            
                 </View>}
                 ref={(ref) => this._drawer = ref}
                 openDrawerOffset={0.6}

@@ -18,7 +18,7 @@ const $sky = '#C3EBFB';
 const $loving_blue = '#0076FF';
 const $ios_blue = '#54C7FC';
 const $ip = '#8E8E93';
-const $menu = '#24B8F3';
+const $menu = '#C3EBFB';
 
 const styles = StyleSheet.create({
 
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
 	titleLarge: {
 		fontSize: $font__large,
 		fontWeight: 'bold',
-	  color: $sky,
+	  color: $menu,
 	},
 
 	titleMedium: {
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     color: 'black',
     padding: 10,
     margin: 5,
-    textAlign: 'center'
+    textAlign: 'center',
 	},
 
 	hamburgerContainer: {
@@ -132,9 +132,7 @@ const styles = StyleSheet.create({
 // MessageScreen
 		messageContainer: {
 			flex: 1,
-			flexDirection: 'column',
-			alignItems: 'flex-start',
-			backgroundColor: $midnight
+			backgroundColor: $midnight,
 		},
 		listItemContainer: {
 			backgroundColor: $midnight,

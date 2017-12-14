@@ -36,7 +36,7 @@ export default class RequestHistory extends React.Component {
 
     fetchMyRequests() {
         if (this.props.navigation.state.params) {
-            this.setState({user: this.props.navigation.state.params.user, 
+            this.setState({user: this.props.navigation.state.params.user,
                 index: 0,
                 routes: [
                   { key: 'created', title: 'Created' },
@@ -58,16 +58,16 @@ export default class RequestHistory extends React.Component {
             });
         }
     }
-    
+
     _renderScene = ({ route }) => {
         switch (route.key) {
         case 'created':
         if (this.state.created) {
-            return (<RequestListComponent data={this.state.created} user={this.state.user} navigation={this.props.navigation}/>);            
+            return (<RequestListComponent data={this.state.created} user={this.state.user} navigation={this.props.navigation}/>);
         }
         case 'accepted':
         if (this.state.accepted) {
-            return (<RequestListComponent data={this.state.accepted} user={this.state.user} navigation={this.props.navigation}/>);            
+            return (<RequestListComponent data={this.state.accepted} user={this.state.user} navigation={this.props.navigation}/>);
         }
         default:
             return <View><Text>oops</Text></View>;
@@ -101,7 +101,7 @@ export default class RequestHistory extends React.Component {
 	render() {
         let view = (
         <TabViewAnimated
-            style={styles.container}
+            style={styles.simpleContainer}
             navigationState={this.state}
             renderScene={this._renderScene}
             renderHeader={this._renderHeader}
@@ -113,7 +113,7 @@ export default class RequestHistory extends React.Component {
                 user={this.state.user}
                 navigation={this.props.navigation}
                 view={view}
-            />        
+            />
         );
     }
 }
