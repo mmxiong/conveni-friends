@@ -53,7 +53,7 @@ export default class ChangePassword extends React.Component {
 
             <LoginFormInput
                 setParentState={newState=>{this.setState(newState)}}
-                field={"password"}
+                field={"oldPassword"}
                 secureTextEntry={true}
                 style={styles.makeLoginLine}
                 onSubmitEditing={(text) => {this.setState({oldPassword: text});}}
@@ -72,7 +72,6 @@ export default class ChangePassword extends React.Component {
                 field={"password2"}
                 secureTextEntry={true}
                 style={styles.makeLoginLine}
-                onSubmitEditing={(text) => {this.setState({password2: text});}}
                 placeholder={'Confirm Password'}/>
 
             <CustomButton
