@@ -62,16 +62,17 @@ export default class HomeScreen extends React.Component {
 		}
 	}
 
-    render() {      
-		const view = (<View style={styles.genericContainer}>
-			<Text style={styles.titleLarge}>I am a...</Text>
-			<CustomButton
-				onPressHandle={() => {this.provider();}}
-				text='Provider'/>
+    render() {
+		const view =
+      (<View style={styles.genericContainer}>
+  			<Text style={styles.titleLarge}>I am a...</Text>
+  			<CustomButton
+  				onPressHandle={() => {this.provider();}}
+  				text='Provider'/>
 
-			<CustomButton
-				onPressHandle={() => {this.requester();}}
-				text='Requester' />
+  			<CustomButton
+  				onPressHandle={() => {this.requester();}}
+  				text='Requester' />
 
 			<CustomButton onPressHandle={() => this.props.navigation.navigate('MessagesScreen', { userId: this.state.user.userId, user: this.state.user })}  // TODO:remove later
 				text='Messages' />
@@ -82,7 +83,7 @@ export default class HomeScreen extends React.Component {
 				user={this.state.user}
 				navigation={this.props.navigation}
 				view={view}
-			/>        
+			/>
 		);
 	}
 }
