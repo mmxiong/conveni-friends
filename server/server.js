@@ -17,7 +17,7 @@ const pool = mysql.createPool({
   password: '704f96be',
   database: 'heroku_f4bd3eb0d7b7de1',
 });
-//
+
 // const pool = mysql.createPool({
 //     connectionLimit : 20,
 //     host: 'localhost',
@@ -170,7 +170,7 @@ app.post('/v1/user/:userId/update', upload.array(), (req, res) => {
     const newPassword = req.body['newPassword'];
 
     const query = `UPDATE User SET password="${newPassword}" ` +
-                  `WHERE BINARY userId="${userId}"`;
+                  `WHERE BINARY userId="${userId}" AND password="${password}"`;
 
     dbQuery(query, (error, results) => {
         if (error) {
