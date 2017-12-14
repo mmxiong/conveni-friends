@@ -68,7 +68,7 @@ export default class MessagesScreen extends Component {
     }
 
     render() {
-        const { userId } = this.props.navigation.state.params;
+        const { userId } = this.props.navigation.state.params.user;
         const { messageSessions } = this.state;
 
         const view = (<View style={styles.messageContainer}>

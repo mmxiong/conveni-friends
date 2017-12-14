@@ -73,7 +73,7 @@ export default class HomeScreen extends React.Component {
 				onPressHandle={() => {this.requester();}}
 				text='Requester' />
 
-			<CustomButton onPressHandle={() => this.props.navigation.navigate('MessagesScreen', { userId: this.state.user.userId })}  // TODO:remove later
+			<CustomButton onPressHandle={() => this.props.navigation.navigate('MessagesScreen', { userId: this.state.user })}  // TODO:remove later
 				text='Messages' />
 		</View>);
 		return (          
