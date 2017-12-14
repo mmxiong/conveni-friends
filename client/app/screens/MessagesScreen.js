@@ -25,7 +25,7 @@ export default class MessagesScreen extends Component {
         };
 
         this.getMessageSession = this.getMessageSession.bind(this);
-        this._setNavigationParams = this._setNavigationParams.bind(this);        
+        this._setNavigationParams = this._setNavigationParams.bind(this);
     }
 
     _setNavigationParams() {
@@ -58,7 +58,7 @@ export default class MessagesScreen extends Component {
 
     getMessageSession(messageSessionId, otherUserId) {
         const { navigation } = this.props;
-        const { userId } = this.props.navigation.state.params;
+        const { userId } = this.props.navigation.state.params.user;
 
         navigation.navigate('MessageScreen', {
             messageSessionId,
@@ -96,7 +96,7 @@ export default class MessagesScreen extends Component {
                 user={this.state.user}
                 navigation={this.props.navigation}
                 view={view}
-            />        
+            />
         );
     }
 }
