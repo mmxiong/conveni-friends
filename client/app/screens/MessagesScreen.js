@@ -73,7 +73,6 @@ export default class MessagesScreen extends Component {
     render() {
         const { userId } = this.state;
         const { messageSessions } = this.state;
-        console.log(this);
         const view = (<View style={styles.messageContainer}>
             <List>
                 { messageSessions.map( messageSession => {
