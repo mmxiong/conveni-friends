@@ -25,7 +25,7 @@ export default class MessagesScreen extends Component {
         };
 
         this.getMessageSession = this.getMessageSession.bind(this);
-        this._setNavigationParams = this._setNavigationParams.bind(this);        
+        this._setNavigationParams = this._setNavigationParams.bind(this);
     }
 
     _setNavigationParams() {
@@ -96,7 +96,7 @@ export default class MessagesScreen extends Component {
                 user={this.state.user}
                 navigation={this.props.navigation}
                 view={view}
-            />        
+            />
         );
     }
 }
