@@ -56,7 +56,7 @@ export default class MessagesScreen extends Component {
         this.setState({user: this.props.navigation.state.params.user})
         this._setNavigationParams();
         // Grab active messageSessions
-        
+
     }
 
     getMessageSession(messageSessionId, otherUserId) {

@@ -37,7 +37,7 @@ export default class RequestHistory extends React.Component {
 
     fetchMyRequests() {
         if (this.props.navigation.state.params) {
-            this.setState({user: this.props.navigation.state.params.user, 
+            this.setState({user: this.props.navigation.state.params.user,
                 index: 0,
                 routes: [
                   { key: 'created', title: 'Created' },
@@ -59,7 +59,7 @@ export default class RequestHistory extends React.Component {
             });
         }
 	}
-	
+
 	handleOnNavigateBack(requestId) {
 		if(requestId && requestId[1] === 'completed') {
 			let newData = this.state.accepted;
@@ -71,10 +71,10 @@ export default class RequestHistory extends React.Component {
 				}
 			}
 			newData.splice(spliceIndex, 1);
-			this.setState({accepted: newData});	
-		} 
+			this.setState({accepted: newData});
+		}
 	}
-    
+
     _renderScene = ({ route }) => {
         switch (route.key) {
         case 'created':
@@ -117,7 +117,7 @@ export default class RequestHistory extends React.Component {
 	render() {
         let view = (
         <TabViewAnimated
-            style={styles.container}
+            style={styles.simpleContainer}
             navigationState={this.state}
             renderScene={this._renderScene}
             renderHeader={this._renderHeader}
@@ -129,7 +129,7 @@ export default class RequestHistory extends React.Component {
                 user={this.state.user}
                 navigation={this.props.navigation}
                 view={view}
-            />        
+            />
         );
     }
 }
