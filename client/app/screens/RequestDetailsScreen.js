@@ -116,13 +116,16 @@ export default class RequestDetailsScreen extends React.Component {
 						<Text style={styles.key}>Details: <Text style={styles.value}>{' ' + description}</Text></Text>
 					</View>
 
-					{ this.getButtons() }
-					{ userId === request.requesterId ||
-						<CustomButton
-							text="Message Requester"
-							onPressHandle={() => this.messageRequester()}
-						/>
-					}
+
+					<View style={styles.genericContainer}>
+						{ this.getButtons() }
+						{ userId === request.requesterId ||
+							<CustomButton
+								text="Message Requester"
+								onPressHandle={() => this.messageRequester()}
+							/>
+						}
+					</View>
 				</ScrollView>
 			</View>
 		);
