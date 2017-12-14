@@ -25,7 +25,13 @@ create database cs130_project;
 source C:\Users\Andrew\Desktop\conveni-friends\setup.sql
 ```
 
-Next, we will be using a local MySQL pool instead of a prod MySQL pool. To do so, edit server/server.js file. Comment lines 13-19 out:
+(On a Mac): Run the setup.sql script on cs13-project.
+
+```
+mysql -u root cs130_project < setup.sql
+```
+
+Next, we will be using a local MySQL instance instead of a MySQL pool on a server. To do so, edit server/server.js file. Comment lines 13-19 out:
 ```
 // const pool = mysql.createPool({
 //   connectionLimit : 50,
