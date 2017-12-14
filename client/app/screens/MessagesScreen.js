@@ -58,7 +58,7 @@ export default class MessagesScreen extends Component {
 
     getMessageSession(messageSessionId, otherUserId) {
         const { navigation } = this.props;
-        const { userId } = this.props.navigation.state.params;
+        const { userId } = this.props.navigation.state.params.user;
 
         navigation.navigate('MessageScreen', {
             messageSessionId,
