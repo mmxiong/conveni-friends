@@ -31,7 +31,8 @@ export default class RequestHistory extends React.Component {
         this._renderHeader = this._renderHeader.bind(this);
         this._renderScene = this._renderScene.bind(this);
         this._setNavigationParams = this._setNavigationParams.bind(this);
-        this._handleIndexChange = this._handleIndexChange.bind(this);
+		this._handleIndexChange = this._handleIndexChange.bind(this);
+		this.handleOnNavigateBack = this.handleOnNavigateBack.bind(this);
     }
 
     fetchMyRequests() {
@@ -57,17 +58,32 @@ export default class RequestHistory extends React.Component {
                 });
             });
         }
-    }
+	}
+	
+	handleOnNavigateBack(requestId) {
+		if(requestId && requestId[1] === 'completed') {
+			let newData = this.state.accepted;
+			let spliceIndex;
+			for(let i = 0; i < newData.length; i++) {
+				let curRequest = newData[i].request;
+				if(curRequest.requestId === requestId) {
+					spliceIndex = i;
+				}
+			}
+			newData.splice(spliceIndex, 1);
+			this.setState({accepted: newData});	
+		} 
+	}
     
     _renderScene = ({ route }) => {
         switch (route.key) {
         case 'created':
         if (this.state.created) {
-            return (<RequestListComponent data={this.state.created} user={this.state.user} navigation={this.props.navigation}/>);            
+            return (<RequestListComponent data={this.state.created} user={this.state.user} navigation={this.props.navigation} handleOnNavigateBack={()=>{console.log('created')}}/>);
         }
         case 'accepted':
         if (this.state.accepted) {
-            return (<RequestListComponent data={this.state.accepted} user={this.state.user} navigation={this.props.navigation}/>);            
+            return (<RequestListComponent data={this.state.accepted} user={this.state.user} navigation={this.props.navigation} handleOnNavigateBack={this.handleOnNavigateBack}/>);
         }
         default:
             return <View><Text>oops</Text></View>;
