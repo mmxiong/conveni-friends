@@ -39,6 +39,7 @@ export default class RequestListComponent extends React.Component {
 					user={this.props.user}
 					renderItem={this._renderItem}
 					extraData={this.props}
+					keyExtractor={(item, index) => index}
 				/>
 			);
 		}
