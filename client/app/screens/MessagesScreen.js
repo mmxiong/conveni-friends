@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'react-native-elements';
 import Drawer from 'react-native-drawer';
-import { View } from 'react-native';
+import { View, AsyncStorage } from 'react-native';
 import styles from 'client/styles/style';
 import config from 'client/config';
 import Hamburger from 'client/app/Common/Hamburger';
@@ -39,26 +39,29 @@ export default class MessagesScreen extends Component {
     }
 
     componentWillMount() {
-        const { userId } = this.props.navigation.state.params;
+        AsyncStorage.getItem('userId')
+        .then(userId => this.setState({ userId },
+             () => {fetch(config.API_URL + `/v1/user/${userId}/messageSessions`)
+                .then(response => {
+                    if (!response.ok) {
+                        // TODO: Handle errors
+                    }
+
+                    return response.json()
+                })
+                .then(messageSessions => this.setState({ messageSessions }))
+                .catch(error => {
+                    // TODO: Handle network errors
+                });}));
+        this.setState({user: this.props.navigation.state.params.user})
         this._setNavigationParams();
         // Grab active messageSessions
-        fetch(config.API_URL + `/v1/user/${userId}/messageSessions`)
-            .then(response => {
-                if (!response.ok) {
-                    // TODO: Handle errors
-                }
-
-                return response.json()
-            })
-            .then(messageSessions => this.setState({ messageSessions }))
-            .catch(error => {
-                // TODO: Handle network errors
-            });
+        
     }
 
     getMessageSession(messageSessionId, otherUserId) {
         const { navigation } = this.props;
-        const { userId } = this.props.navigation.state.params.user;
+        const { userId } = this.state;
 
         navigation.navigate('MessageScreen', {
             messageSessionId,
@@ -68,9 +71,9 @@ export default class MessagesScreen extends Component {
     }
 
     render() {
-        const { userId } = this.props.navigation.state.params.user;
+        const { userId } = this.state;
         const { messageSessions } = this.state;
-
+        console.log(this);
         const view = (<View style={styles.messageContainer}>
             <List>
                 { messageSessions.map( messageSession => {
