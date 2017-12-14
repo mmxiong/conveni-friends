@@ -375,7 +375,7 @@ app.post('/v1/request/:request_id/confirm', (req, res) => {
 
     const query = `UPDATE Request ` +
                   `SET confirmed='${time}', providerId='${userId}' ` +
-                  `WHERE BINARY requestId='${requestId}' AND '${time}' < timeEnd;`
+                  `WHERE BINARY requestId=${requestId} AND '${time}' < timeEnd;`
 
     dbQuery(query, (error, results) => {
         if (error) {
@@ -416,7 +416,7 @@ app.post('/v1/request/:requestId/complete', (req, res) => {
     const { requestId } = req.params;
 
     const query = `UPDATE Request SET completed='${time}' `
-                + `WHERE BINARY requestId='${requestId}' AND providerId='${userId}'`
+                + `WHERE BINARY requestId=${requestId} AND providerId='${userId}'`
                 + `AND '${time}' < timeEnd`;
 
     dbQuery(query, (error, results) => {
