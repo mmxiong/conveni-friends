@@ -54,18 +54,24 @@ export default class RequestDetailsScreen extends React.Component {
 			return;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return !accepted
 			? <CustomButton text="Accept" onPressHandle={() => this.accept()} />
 			: (!completed ? <CustomButton text="Complete" onPressHandle={() => this.complete()} />
 			: <Text>completed!</Text>);
 =======
+=======
+>>>>>>> adc4faa2996e044c965c112ae2a83498aa32bc79
 		if (!accepted) {
 			return <CustomButton text="Accept" onPressHandle={() => this.accept()} />;
 		} else if (userId == providerId && !completed) {
 			return <CustomButton text="Complete" onPressHandle={() => this.complete()} />;
 		}
 		return;
+<<<<<<< HEAD
 >>>>>>> upstream/brandon-master
+=======
+>>>>>>> adc4faa2996e044c965c112ae2a83498aa32bc79
 	}
 
 	accept() {
