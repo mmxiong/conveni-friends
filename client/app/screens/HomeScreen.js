@@ -53,34 +53,36 @@ export default class HomeScreen extends React.Component {
     componentWillMount() {
         this._setNavigationParams();
         this._getUser();
-      }
+	}
 
-    render() {
-        const { navigate } = this.props.navigation;
-        if (!this.state.user.userId) {
-            navigate('LoginScreen');
-        }
-        const view = (<View style={styles.genericContainer}>
-            <Text style={styles.titleLarge}>I am a...</Text>
-            <CustomButton
-                 onPressHandle={() => {this.provider();}}
-                 text='Provider'/>
+	componentDidMount () {
+		const { navigate } = this.props.navigation;
+		if (!this.state.user.userId) {
+			navigate('LoginScreen');
+		}
+	}
 
-             <CustomButton
-                 onPressHandle={() => {this.requester();}}
-                 text='Requester' />
+    render() {      
+		const view = (<View style={styles.genericContainer}>
+			<Text style={styles.titleLarge}>I am a...</Text>
+			<CustomButton
+				onPressHandle={() => {this.provider();}}
+				text='Provider'/>
 
-             <CustomButton onPressHandle={() => navigate('MessagesScreen', { userId: this.state.user.userId })}  // TODO:remove later
-                 text='Messages' />
-        </View>);
-        return (          
-            <HamburgerMenu
-                setParentState={newState=>{this.setState(newState)}}
-                user={this.state.user}
-                navigation={this.props.navigation}
-                view={view}
-            />        
-        );
+			<CustomButton
+				onPressHandle={() => {this.requester();}}
+				text='Requester' />
 
-    }
+			<CustomButton onPressHandle={() => navigate('MessagesScreen', { userId: this.state.user.userId })}  // TODO:remove later
+				text='Messages' />
+		</View>);
+		return (          
+			<HamburgerMenu
+				setParentState={newState=>{this.setState(newState)}}
+				user={this.state.user}
+				navigation={this.props.navigation}
+				view={view}
+			/>        
+		);
+	}
 }

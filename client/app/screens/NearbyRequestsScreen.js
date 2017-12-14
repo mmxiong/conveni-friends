@@ -15,8 +15,24 @@ export default class NearbyRequestsScreen extends React.Component {
             data: [],
             user: null
         };
-        this.fetchNearbyRequests = this.fetchNearbyRequests.bind(this);
-    }
+		this.fetchNearbyRequests = this.fetchNearbyRequests.bind(this);
+		this.handleOnNavigateBack = this.handleOnNavigateBack.bind(this);
+	}
+
+	handleOnNavigateBack(requestId) {
+		if(requestId) {
+			let newData = this.state.data;
+			let spliceIndex;
+			for(let i = 0; i < newData.length; i++) {
+				let curRequest = newData[i].request;
+				if(curRequest.requestId === requestId) {
+					spliceIndex = i;
+				}
+			}
+			newData.splice(spliceIndex, 1);
+			this.setState({data: newData});	
+		} 
+	}
 
     fetchNearbyRequests() {
         if (this.props.navigation.state.params) {
@@ -36,7 +52,7 @@ export default class NearbyRequestsScreen extends React.Component {
         if (this.state.data) {
             return (
               <View style={styles.simpleContainer}>
-                <RequestListComponent data={this.state.data} navigation={this.props.navigation}/>
+                <RequestListComponent data={this.state.data} user={this.state.user} navigation={this.props.navigation} handleOnNavigateBack={this.handleOnNavigateBack}/>
               </View>
             );
         }

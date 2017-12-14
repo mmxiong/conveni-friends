@@ -60,8 +60,8 @@ export default class MakeRequestScreen extends React.Component {
 				 "Start time can't be from the past. Start and end times must be an hour apart");
 			}
 			else {
-				timeStart = this.state.startTime.toISOString().slice(0, 19).replace('T', ' ');
-				timeEnd = this.state.endTime.toISOString().slice(0, 19).replace('T', ' ');
+				let timeStart = this.state.startTime.toISOString().slice(0, 19).replace('T', ' ');
+				let timeEnd = this.state.endTime.toISOString().slice(0, 19).replace('T', ' ');
 				let request = new Request(this.state.user.userId, null, this.state.title,
 					this.state.description, 0.0, 0.0, this.state.location, timeStart, timeEnd);
 				this.props.navigation.navigate("RequesterLocation", {
