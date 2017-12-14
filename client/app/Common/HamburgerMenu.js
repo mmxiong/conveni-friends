@@ -29,7 +29,7 @@ export default class HamburgerMenu extends Component {
     }
     messages() {
         this._drawer.close();
-        this.props.navigation.navigate('MessagesScreen', {userId: this.props.user.userId});
+        this.props.navigation.navigate('MessagesScreen', {user: this.props.user, userId: this.props.user.userId});
     }
     componentDidMount() {
         this.props.setParentState({hamburgerMenu: this});

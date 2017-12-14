@@ -38,11 +38,12 @@ export default class RequestDetailsScreen extends React.Component {
 	}
 
 	componentWillUnmount () {
-		if(this.state.request.accepted) {
-			this.props.navigation.state.params.onNavigateBack(this.state.request.requestId);
-		} else {
-			this.props.navigation.state.params.onNavigateBack(null);
+		if(this.state.request.completed) {
+			this.props.navigation.state.params.onNavigateBack([this.state.request.requestId, 'completed']);
 		}
+		else if(this.state.request.accepted && !this.state.request.completed) {
+			this.props.navigation.state.params.onNavigateBack(this.state.request.requestId, 'accepted');
+		} 
 	}
 
 	getButtons() {
@@ -76,8 +77,13 @@ export default class RequestDetailsScreen extends React.Component {
 		const { user } = this.state;
 		const { requestId } = this.props.navigation.state.params.request;
 		user.completeRequest(requestId).then((response) => {
+			const { request } = this.state;
+			this.setState({ request: { ...request, completed: true }});
 			this.props.navigation.navigate('RequestHistory', {user: user});
-		}).catch((error) => (Alert.alert("There was an error completing the request, try again later")));
+		}).catch((error) => {
+			console.log(error);
+			Alert.alert("There was an error completing the request, try again later")
+		});
 	}
 
 	messageRequester() {
