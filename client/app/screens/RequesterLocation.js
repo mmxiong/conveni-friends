@@ -46,7 +46,7 @@ export default class RequesterLocation extends React.Component {
 		const address = 'westwood village 90024'; // TODO: replace this w/ props.address
 		const buttonText = 'Confirm Location' // TODO: replace this based on requester/provider
 		return (
-			<MapComponent address={address} buttonText={buttonText}
+			<MapComponent address={this.state.request.address} buttonText={buttonText}
                 setParentState={newState=>{this.setState(newState)}}
                 goTo={this.submitRequest}/>
 		);

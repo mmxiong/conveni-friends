@@ -17,7 +17,7 @@ const pool = mysql.createPool({
   password: '704f96be',
   database: 'heroku_f4bd3eb0d7b7de1',
 });
-//
+
 // const pool = mysql.createPool({
 //     connectionLimit : 20,
 //     host: 'localhost',
@@ -170,7 +170,7 @@ app.post('/v1/user/:userId/update', upload.array(), (req, res) => {
     const newPassword = req.body['newPassword'];
 
     const query = `UPDATE User SET password="${newPassword}" ` +
-                  `WHERE BINARY userId="${userId}"`;
+                  `WHERE BINARY userId="${userId}" AND password="${password}"`;
 
     dbQuery(query, (error, results) => {
         if (error) {
@@ -412,7 +412,7 @@ app.post('/v1/request/:request_id/confirm', (req, res) => {
  * @returns {res} The response, including an HTTP status indicating success or failure, and error info, if any.
  */
 app.post('/v1/request/:requestId/complete', (req, res) => {
-    const { userId, time } = req.query;
+    const { userId, time } = req.body;
     const { requestId } = req.params;
 
     const query = `UPDATE Request SET completed=${time} `

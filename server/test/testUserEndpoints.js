@@ -45,7 +45,7 @@ it('GET /', done => {
         expect(res).to.have.status(200);
         // See TODO1 in server.js, we need to set the content type to
         // json but it isn't working for some reason
-        expect(res.text).to.equal("Test GET request");
+        expect(res.text).to.equal('[]');
         done();
       });
 });
@@ -147,7 +147,10 @@ it('Should get a user\'s requests', function(done) {
 
 it('Should reject acceptance of an expired request', function(done) {
     chai.request(app)
-    .post('/v1/request/1/accept?userId="0"&time="2017-01-12 00:00:00"')
+    .post('/v1/request/1/accept')
+    .send({"userId":"0",
+           "time":"2017-01-12 00:00:00",
+        })
     .end(function(err, res) {
         res.should.have.status(404);
         done();
@@ -156,7 +159,10 @@ it('Should reject acceptance of an expired request', function(done) {
 
 it('Should accept a user\'s request', function(done) {
     chai.request(app)
-    .post('/v1/request/1/accept?userId="0"&time="2017-01-10 00:00:00"')
+    .post('/v1/request/1/accept')
+    .send({"userId":"0",
+           "time":"2017-01-10 00:00:00",
+        })
     .end(function(err, res) {
         res.should.have.status(200);
         done();
@@ -227,7 +233,9 @@ it('Should create a message session', function(done) {
 	});
 
     chai.request(app)
-    .post('/v1/message/session/create?userId1="0"&userId2="1"')
+    .post('/v1/message/session/create')
+    .send({"userId1":"0",
+		   "userId2":"1"})
     .end(function(err, res) {
         res.should.have.status(200);
         done();

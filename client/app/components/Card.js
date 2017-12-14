@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {
 	Text,
 	StyleSheet,
@@ -20,15 +21,15 @@ export default class Card extends React.Component {
 	render() {
 		let { data, onClick } = this.props;
 		let { distance, request } = data;
-		request.timeStart = request.timeStart.slice(0, 19).replace('T', ' ');
-		request.timeEnd = request.timeEnd.slice(0, 19).replace('T', ' ');
-		if (distance) { distance = distance.toString().substr(0, 4) + ' mi'; }
+		let timeStart = moment(request.timeStart).format('M-D-YY h:ma');
+		let timeEnd = moment(request.timeEnd).format('M-D-YY h:ma');
+		distance = distance.toString().substr(0, 4) + ' mi';
 		return (
 			<View >
 				<TouchableOpacity onPress={() => onClick()} style={styles.cardContainer}>
 					<View style={styles.cardLeft}>
 						<Text style={styles.cardTitle} numberOfLines={1} >{request.title}</Text>
-						<Text style={styles.cardSubTitle} numberOfLines={1}>{request.timeStart} - {request.timEnd}</Text>
+						<Text style={styles.cardSubTitle} numberOfLines={1}>{timeStart} - {timeEnd}</Text>
 					</View>
 					<View style={styles.cardRight}>
 						<Text style={styles.cardDistance}>{distance}</Text>

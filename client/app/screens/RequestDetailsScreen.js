@@ -30,9 +30,11 @@ export default class RequestDetailsScreen extends React.Component {
 	}
 
 	componentWillMount() {
-		AsyncStorage.getItem('userId')
-			.then(userId => this.setState({ userId }, console.log(this)));
-	}
+			const { request } = this.props.navigation.state.params;
+			AsyncStorage.getItem('userId')
+				.then(userId => this.setState({ userId }));
+			  this.setState({user: this.props.navigation.state.params.user, request})
+		}
 
 	getButtons() {
 		const { userId } = this.state;
@@ -41,10 +43,12 @@ export default class RequestDetailsScreen extends React.Component {
 		if (!userId || userId === requesterId) {
 			return;
 		}
-		return !accepted
-			? <CustomButton text="Accept" onPressHandle={() => this.accept()} />
-			: (!completed ? <CustomButton text="Complete" onPressHandle={() => this.complete()} />
-			: <Text>completed!</Text>);
+		if (!accepted) {
+			return <CustomButton text="Accept" onPressHandle={() => this.accept()} />;
+		} else if (userId === providerId && !completed) {
+			return <CustomButton text="Complete" onPressHandle={() => this.complete()} />;
+		}
+		return;
 	}
 
 	accept() {
@@ -61,16 +65,11 @@ export default class RequestDetailsScreen extends React.Component {
 	}
 
 	complete() {
-		const { userId } = this.state;
-		const { requesterId, requestId } = this.props.navigation.state.params.request;
-
-		axios.post(`${config.API_URL}/v1/request/${requestId}/complete`, {
-			userId,
-			time: moment().format('YYYY-MM-DD HH:MM:ss')
-		});
-		user = new User();
-		user.userId = userId;
-		this.props.navigation.navigate('ProviderScreen', {user: user});
+		const { user } = this.state;
+		const { requestId } = this.props.navigation.state.params.request;
+		user.completeRequest(requestId).then((response) => {
+			this.props.navigation.navigate('RequestHistory', {user: user});
+		}).catch((error) => (Alert.alert("There was an error completing the request, try again later")));
 	}
 
 	messageRequester() {
@@ -96,12 +95,11 @@ export default class RequestDetailsScreen extends React.Component {
 		const request = this.props.navigation.state.params.request;
 		const { requesterId, title, address, description } = request;
 		const { timeStart, timeEnd, accepted, confirmed, completed } = request;
-		const { userId } = this.state;
-
 		return (
 			<View style={styles.simpleContainer}>
 				<ScrollView style={styles.detailsMakeContainer}>
 					<View style={styles.makeInputView}>
+						<RequestInfoLine primary={'Requester'} secondary={' ' + requesterId} />
 						<RequestInfoLine primary={'Request'} secondary={' ' + title} />
 						<RequestInfoLine primary={'Location'} secondary={' ' + address} />
 						<RequestInfoLine primary={'Start Time'} secondary={' ' + timeStart} />
