@@ -23,7 +23,7 @@ export default class Card extends React.Component {
 		let { distance, request } = data;
 		let timeStart = moment(request.timeStart).format('M-D-YY h:ma');
 		let timeEnd = moment(request.timeEnd).format('M-D-YY h:ma');
-		distance = distance.toString().substr(0, 4) + ' mi';
+		if (distance != null) distance = distance.toString().substr(0, 4) + ' mi';
 		return (
 			<View >
 				<TouchableOpacity onPress={() => onClick()} style={styles.cardContainer}>

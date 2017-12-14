@@ -101,7 +101,9 @@ export default class RequestDetailsScreen extends React.Component {
 	render() {
 		const { userId, request } = this.state;
 		const { requesterId, title, address, description } = request;
-		const { timeStart, timeEnd, accepted, confirmed, completed } = request;
+		const { accepted, confirmed, completed } = request;
+		const timeStart = moment(request.timeStart).format('M-D-YY h:ma');
+		const timeEnd = moment(request.timeEnd).format('M-D-YY h:ma');
 		return (
 			<View style={styles.simpleContainer}>
 				<ScrollView style={styles.detailsMakeContainer}>
