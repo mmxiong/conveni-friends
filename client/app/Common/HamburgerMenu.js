@@ -52,13 +52,13 @@ export default class HamburgerMenu extends Component {
                       >Request History</Text>
 
                     <Text style={styles.hamburgerItem}
-                      onPress={() => {this.history();}}
+                      onPress={() => {this.messages();}}
                       >Messages</Text>
 
                     <Text style={styles.hamburgerItem}
-                      onPress={() => {this.history();}}
+                      onPress={() => {this.logout();}}
                       >Logout</Text>
-                                            
+
                 </View>}
                 ref={(ref) => this._drawer = ref}
                 openDrawerOffset={0.6}
